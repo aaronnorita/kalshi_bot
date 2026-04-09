@@ -1,0 +1,6 @@
+class Counter():
+    init
+
+    pass
+
+

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kalshi-bot"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.9",         # HTTP + WebSocket client (async)
+    "pydantic>=2.0",        # Data validation
+    "pydantic-settings>=2.0",  # Settings with env var support
+    "pyyaml>=6.0",          # YAML config parsing
+    "structlog>=24.0",      # Structured JSON logging
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=5.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.mypy]
+strict = true

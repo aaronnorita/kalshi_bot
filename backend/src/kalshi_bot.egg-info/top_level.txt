@@ -1,0 +1,2 @@
+bot
+kalshi_bot

@@ -1,0 +1,49 @@
+# Kalshi Bot Configuration
+# Secrets (API keys) must be set as environment variables:
+#   export KALSHI__API_KEY="your-key-here"
+#   export KALSHI__API_SECRET="your-secret-here"
+#
+# Values here can be overridden by env vars using double-underscore notation:
+#   export EXECUTION__MODE=live
+#   export RISK__MAX_DAILY_SPEND_CENTS=10000
+
+kalshi:
+  base_url: "https://trading-api.kalshi.com/trade-api/v2"
+  ws_url: "wss://trading-api.kalshi.com/trade-api/ws/v2"
+  request_timeout_seconds: 10.0
+  max_retries: 3
+
+data_feed:
+  mode: "rest_poll"       # "rest_poll" or "websocket"
+  poll_interval_seconds: 5.0
+  tickers: []             # TODO: add the market tickers you want to trade
+  # tickers:
+  #   - "SOME-MARKET-TICKER-1"
+  #   - "SOME-MARKET-TICKER-2"
+
+execution:
+  mode: "paper"           # CHANGE TO "live" ONLY after extensive backtesting
+  paper_fill_delay_seconds: 0.1
+  paper_slippage_cents: 1
+
+risk:
+  max_position_per_market: 50
+  max_total_contracts: 200
+  max_order_value_cents: 500     # $5.00 per order
+  max_daily_spend_cents: 5000    # $50.00 per day
+  max_open_orders: 10
+  max_daily_loss_cents: 2000     # Kill switch at -$20.00
+  min_signal_confidence: 0.0    # TODO: raise this once your strategy uses confidence
+
+state:
+  db_path: "data/state.db"
+  checkpoint_interval_seconds: 60.0
+
+logging:
+  level: "INFO"
+  format: "console"       # "console" for dev, "json" for production
+  log_file: null          # null = stdout only; or set "logs/bot.log"
+
+strategy:
+  strategy_id: "default"
+  params: {}              # TODO: add your strategy-specific parameters here
